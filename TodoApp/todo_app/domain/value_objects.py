@@ -7,6 +7,10 @@ class TaskStatus(Enum):
     IN_PROGRESS = "IN_PROGRESS"
     DONE = "DONE"
 
+class ProjectStatus(Enum):
+    ACTIVE = "ACTIVE"
+    COMPLETED = "COMPLETED"
+
 class Priority(Enum):
     LOW = 1
     MEDIUM = 2
