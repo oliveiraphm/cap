@@ -1,6 +1,8 @@
 from copy import deepcopy
 from dataclasses import dataclass
+from uuid import UUID
 
+from TodoApp.todo_app.application.dtos.operations import DeletionOutcome
 from TodoApp.todo_app.application.common.result import Result, Error
 from TodoApp.todo_app.application.dtos.task_dtos import CompleteTaskRequest,CreateTaskRequest,TaskResponse,SetTaskPriorityRequest
 from TodoApp.todo_app.application.service_ports.notifications import NotificationPort
@@ -94,4 +96,68 @@ class SetTaskPriorityUseCase:
 
             return Result.success(TaskResponse.from_entity(task))
         except ValidationError as e:
-            return Result.failure(Error.validation_error(str(e)))    
+            return Result.failure(Error.validation_error(str(e)))
+
+@dataclass
+class GetTaskUseCase:
+
+    task_repository: TaskRepository
+
+    def execute(self, task_id: UUID) -> Result[TaskResponse]:
+
+        try:
+            task = self.task_repository.get(task_id)
+            return Result.success(TaskResponse.from_entity(task))
+        except TaskNotFoundError:
+            return Result.failure(Error.not_found("Task", str(task_id)))
+
+
+@dataclass
+class UpdateTaskUseCase:
+
+    task_repository: TaskRepository
+    notification_service: NotificationPort
+
+    def execute(self, request: UpdateTaskRequest) -> Result[TaskResponse]:
+        try:
+            params = request.to_execution_params()
+            task = self.task_repository.get(params["task_id"])
+
+            if params.get("title") is not None:
+                task.title = params["title"]
+            if params.get("description") is not None:
+                task.description = params["description"]
+            if params.get("status") is not None:
+                task.status = params["status"]
+            if params.get("priority") is not None:
+                task.priority = params["priority"]
+                if task.priority == Priority.HIGH:
+                    self.notification_service.notify_task_high_priority(task)
+            if "deadline" in params:
+                task.due_date = params["deadline"]
+
+            self.task_repository.save(task)
+            return Result.success(TaskResponse.from_entity(task))
+
+        except TaskNotFoundError:
+            return Result.failure(Error.not_found("Task", str(params["task_id"])))
+        except ValidationError as e:
+            return Result.failure(Error.validation_error(str(e)))
+        except BusinessRuleViolation as e:
+            return Result.failure(Error.business_rule_violation(str(e)))
+
+
+@dataclass
+class DeleteTaskUseCase:
+
+    task_repository: TaskRepository
+
+    def execute(self, task_id: UUID) -> Result[DeletionOutcome]:
+
+        try:
+            # Verify task exists before deletion
+            self.task_repository.get(task_id)
+            self.task_repository.delete(task_id)
+            return Result.success(DeletionOutcome(task_id))
+        except TaskNotFoundError:
+            return Result.failure(Error.not_found("Task", str(task_id)))

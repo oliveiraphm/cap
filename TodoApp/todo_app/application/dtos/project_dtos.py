@@ -91,4 +91,19 @@ class CompleteProjectResponse:
             completion_date=project.completed_at,
             task_count=len(project.tasks),
             completion_notes=project.completion_notes,
-        )      
+        ) 
+
+@dataclass
+class UpdateProjectRequest:
+
+    project_id: str
+    name: Optional[str] = None
+    description: Optional[str] = None
+
+    def to_execution_params(self) -> dict:
+
+        return {
+            "project_id": UUID(self.project_id),
+            "name": self.name,
+            "description": self.description
+        }

@@ -4,7 +4,7 @@ from uuid import UUID
 
 from TodoApp.todo_app.application.repositories.project_repository import ProjectRepository
 from TodoApp.todo_app.application.repositories.task_repository import TaskRepository
-from TodoApp.todo_app.application.serivce_ports.notifications import NotificationPort
+from TodoApp.todo_app.application.service_ports.notifications import NotificationPort
 
 from TodoApp.todo_app.domain.entities.project import Project
 from TodoApp.todo_app.domain.entities.task import Task

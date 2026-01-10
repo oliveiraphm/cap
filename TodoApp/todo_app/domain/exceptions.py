@@ -14,6 +14,9 @@ class ProjectNotFoundError(DomainError):
         self.project_id = project_id
         super().__init__(f"Project with id {project_id} not found")
 
+class InboxNotFoundError(DomainError):
+    pass
+
 class ValidationError(DomainError):
     pass
 

@@ -11,6 +11,10 @@ class ProjectStatus(Enum):
     ACTIVE = "ACTIVE"
     COMPLETED = "COMPLETED"
 
+class ProjectType(Enum):
+    REGULAR = "REGULAR"
+    INBOX = "INBOX"
+
 class Priority(Enum):
     LOW = 1
     MEDIUM = 2

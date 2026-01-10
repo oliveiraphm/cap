@@ -1,8 +1,10 @@
 from copy import deepcopy
 from dataclasses import dataclass
+from uuid import UUID
 
+from TodoApp.todo_app.domain.value_objects import ProjectType
 from TodoApp.todo_app.application.common.result import Result, Error
-from TodoApp.todo_app.application.dtos.project_dtos import CreateProjectRequest, ProjectResponse, CompleteProjectRequest, CompleteProjectResponse
+from TodoApp.todo_app.application.dtos.project_dtos import CreateProjectRequest, ProjectResponse, CompleteProjectRequest, CompleteProjectResponse, UpdateProjectRequest
 from TodoApp.todo_app.application.service_ports.notifications import NotificationPort
 from TodoApp.todo_app.application.repositories.project_repository import ProjectRepository
 from TodoApp.todo_app.application.repositories.task_repository import TaskRepository
@@ -59,6 +61,63 @@ class CompleteProjectUseCase:
                     self.task_repository.save(task_snapshot)
                 self.project_repository.save(project_snapshot)
                 raise
+
+        except ProjectNotFoundError:
+            return Result.failure(Error.not_found("Project", str(params["project_id"])))
+        except ValidationError as e:
+            return Result.failure(Error.validation_error(str(e)))
+        except BusinessRuleViolation as e:
+            return Result.failure(Error.business_rule_violation(str(e)))
+        
+@dataclass
+class GetProjectUseCase:
+
+    project_repository: ProjectRepository
+
+    def execute(self, project_id: str) -> Result[ProjectResponse]:
+
+        try:
+            project = self.project_repository.get(UUID(project_id))
+            return Result.success(ProjectResponse.from_entity(project))
+        except ProjectNotFoundError:
+            return Result.failure(Error.not_found("Project", project_id))
+
+
+@dataclass
+class ListProjectsUseCase:
+    project_repository: ProjectRepository
+
+    def execute(self) -> Result[list[ProjectResponse]]:
+
+        try:
+            projects = self.project_repository.get_all()
+            return Result.success([ProjectResponse.from_entity(p) for p in projects])
+        except Exception as e:
+            return Result.failure(Error.business_rule_violation(str(e)))
+
+
+@dataclass
+class UpdateProjectUseCase:
+
+    project_repository: ProjectRepository
+
+    def execute(self, request: UpdateProjectRequest) -> Result:
+        try:
+            params = request.to_execution_params()
+            project = self.project_repository.get(params["project_id"])
+
+            if project.project_type == ProjectType.INBOX:
+                return Result.failure(
+                    Error.business_rule_violation("The INBOX project cannot be modified")
+                )
+
+            if params["name"] is not None:
+                project.name = params["name"]
+            if params["description"] is not None:
+                project.description = params["description"]
+
+            self.project_repository.save(project)
+            return Result.success(ProjectResponse.from_entity(project))
 
         except ProjectNotFoundError:
             return Result.failure(Error.not_found("Project", str(params["project_id"])))

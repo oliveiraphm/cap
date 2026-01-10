@@ -1,0 +1,27 @@
+from pathlib import Path
+from typing import Tuple
+
+from TodoApp.todo_app.application.repositories.project_repository import ProjectRepository
+from TodoApp.todo_app.application.repositories.task_repository import TaskRepository
+from TodoApp.todo_app.infrastructure.persistence.memory import InMemoryTaskRepository, InMemoryProjectRepository
+from TodoApp.todo_app.infrastructure.persistence.file import FileTaskRepository, FileProjectRepository
+from TodoApp.todo_app.infrastructure.config import Config, RepositoryType
+
+def create_repositories() -> Tuple[TaskRepository, ProjectRepository]:
+
+    repo_type = Config.get_repository_type()
+
+    if repo_type == RepositoryType.FILE:
+        data_dir = Config.get_data_directory()
+        task_repo = FileTaskRepository(data_dir)
+        project_repo = FileProjectRepository(data_dir)
+        project_repo.set_task_repository(task_repo)
+        return task_repo, project_repo
+    elif repo_type == RepositoryType.MEMORY:
+        task_repo = InMemoryTaskRepository()
+        project_repo = InMemoryProjectRepository()
+
+        project_repo.set_task_repository(task_repo)
+        return task_repo, project_repo
+    else:
+        raise ValueError(f"Invalid repository type: {repo_type}")
