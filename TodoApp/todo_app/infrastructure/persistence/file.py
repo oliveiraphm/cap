@@ -4,12 +4,12 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence
 from uuid import UUID
 
-from TodoApp.todo_app.domain.entities.task import Task
-from TodoApp.todo_app.domain.entities.project import Project
-from TodoApp.todo_app.domain.exceptions import TaskNotFoundError, ProjectNotFoundError, InboxNotFoundError
-from TodoApp.todo_app.domain.value_objects import ProjectType, TaskStatus, ProjectStatus, Priority, Deadline
-from TodoApp.todo_app.application.repositories.task_repository import TaskRepository
-from TodoApp.todo_app.application.repositories.project_repository import ProjectRepository
+from todo_app.domain.entities.task import Task
+from todo_app.domain.entities.project import Project
+from todo_app.domain.exceptions import TaskNotFoundError, ProjectNotFoundError, InboxNotFoundError
+from todo_app.domain.value_objects import ProjectType, TaskStatus, ProjectStatus, Priority, Deadline
+from todo_app.application.repositories.task_repository import TaskRepository
+from todo_app.application.repositories.project_repository import ProjectRepository
 
 class JsonEncoder(json.JSONDecoder):
 

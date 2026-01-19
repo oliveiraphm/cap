@@ -2,14 +2,14 @@ from dataclasses import dataclass
 from typing import Sequence 
 from uuid import UUID
 
-from TodoApp.todo_app.application.repositories.project_repository import ProjectRepository
-from TodoApp.todo_app.application.repositories.task_repository import TaskRepository
-from TodoApp.todo_app.application.service_ports.notifications import NotificationPort
+from todo_app.application.repositories.project_repository import ProjectRepository
+from todo_app.application.repositories.task_repository import TaskRepository
+from todo_app.application.service_ports.notifications import NotificationPort
 
-from TodoApp.todo_app.domain.entities.project import Project
-from TodoApp.todo_app.domain.entities.task import Task
-from TodoApp.todo_app.domain.exceptions import TaskNotFoundError, ProjectNotFoundError
-from TodoApp.todo_app.domain.value_objects import TaskStatus
+from todo_app.domain.entities.project import Project
+from todo_app.domain.entities.task import Task
+from todo_app.domain.exceptions import TaskNotFoundError, ProjectNotFoundError
+from todo_app.domain.value_objects import TaskStatus
 
 @dataclass
 class InMemoryTaskRepository(TaskRepository):

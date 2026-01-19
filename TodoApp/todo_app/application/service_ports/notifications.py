@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from TodoApp.todo_app.domain.entities.task import Task
+from todo_app.domain.entities.task import Task
 
 class NotificationPort(ABC):
 

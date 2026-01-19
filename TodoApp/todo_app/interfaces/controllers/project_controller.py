@@ -2,11 +2,11 @@ from dataclasses import dataclass
 from typing import Optional
 from uuid import UUID
 
-from TodoApp.todo_app.interfaces.view_models.project_vm import ProjectViewModel
-from TodoApp.todo_app.interfaces.presenters.base import ProjectPresenter
-from TodoApp.todo_app.interfaces.view_models.base import OperationResult
-from TodoApp.todo_app.application.dtos.project_dtos import CompleteProjectRequest, CreateProjectRequest, UpdateProjectRequest
-from TodoApp.todo_app.application.use_cases.project_use_cases import CompleteProjectUseCase, CreateProjectUseCase, GetProjectUseCase, ListProjectsUseCase, UpdateProjectUseCase
+from todo_app.interfaces.view_models.project_vm import ProjectViewModel
+from todo_app.interfaces.presenters.base import ProjectPresenter
+from todo_app.interfaces.view_models.base import OperationResult
+from todo_app.application.dtos.project_dtos import CompleteProjectRequest, CreateProjectRequest, UpdateProjectRequest
+from todo_app.application.use_cases.project_use_cases import CompleteProjectUseCase, CreateProjectUseCase, GetProjectUseCase, ListProjectsUseCase, UpdateProjectUseCase
 
 @dataclass
 class ProjectController:

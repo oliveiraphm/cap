@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from uuid import UUID
 
-from TodoApp.todo_app.domain.entities.project import Project
+from todo_app.domain.entities.project import Project
 
 class ProjectRepository(ABC):
 

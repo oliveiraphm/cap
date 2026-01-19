@@ -1,7 +1,7 @@
 import dataclasses
 import pytest
 
-from TodoApp.todo_app.interfaces.view_models.task_vm import TaskViewModel
+from todo_app.interfaces.view_models.task_vm import TaskViewModel
 
 
 def test_task_view_model_creation():

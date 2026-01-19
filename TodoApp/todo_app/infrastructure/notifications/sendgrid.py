@@ -2,9 +2,9 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 import logging
 
-from TodoApp.todo_app.application.service_ports.notifications import NotificationPort
-from TodoApp.todo_app.domain.entities.task import Task
-from TodoApp.todo_app.infrastructure.config import Config
+from todo_app.application.service_ports.notifications import NotificationPort
+from todo_app.domain.entities.task import Task
+from todo_app.infrastructure.config import Config
 
 logger = logging.getLogger(__name__)
 

@@ -3,9 +3,9 @@ from datetime import datetime, timedelta, timezone
 import pytest
 from freezegun import freeze_time
 
-from TodoApp.todo_app.domain.entities.task import Task
-from TodoApp.todo_app.domain.services.task_priority_calculator import TaskPriorityCalculator
-from TodoApp.todo_app.domain.value_objects import Deadline, Priority
+from todo_app.domain.entities.task import Task
+from todo_app.domain.services.task_priority_calculator import TaskPriorityCalculator
+from todo_app.domain.value_objects import Deadline, Priority
 
 class TestDeadline:
     def test_create_valid_future_deadline(self):

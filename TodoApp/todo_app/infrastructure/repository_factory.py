@@ -1,11 +1,12 @@
 from pathlib import Path
 from typing import Tuple
 
-from TodoApp.todo_app.application.repositories.project_repository import ProjectRepository
-from TodoApp.todo_app.application.repositories.task_repository import TaskRepository
-from TodoApp.todo_app.infrastructure.persistence.memory import InMemoryTaskRepository, InMemoryProjectRepository
-from TodoApp.todo_app.infrastructure.persistence.file import FileTaskRepository, FileProjectRepository
-from TodoApp.todo_app.infrastructure.config import Config, RepositoryType
+from todo_app.application.repositories.project_repository import ProjectRepository
+from todo_app.application.repositories.task_repository import TaskRepository
+from todo_app.infrastructure.persistence.memory import InMemoryTaskRepository, InMemoryProjectRepository
+from todo_app.infrastructure.persistence.file import FileTaskRepository, FileProjectRepository
+from todo_app.infrastructure.config import Config, RepositoryType
+
 
 def create_repositories() -> Tuple[TaskRepository, ProjectRepository]:
 
@@ -18,6 +19,7 @@ def create_repositories() -> Tuple[TaskRepository, ProjectRepository]:
         project_repo.set_task_repository(task_repo)
         return task_repo, project_repo
     elif repo_type == RepositoryType.MEMORY:
+
         task_repo = InMemoryTaskRepository()
         project_repo = InMemoryProjectRepository()
 

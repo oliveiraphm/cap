@@ -5,13 +5,13 @@ from freezegun import freeze_time
 
 from tests.application.conftest import InMemoryTaskRepository, NotificationRecorder
 
-from TodoApp.todo_app.application.common.result import ErrorCode
-from TodoApp.todo_app.application.use_cases.deadline_use_cases import CheckDeadlineUseCase
+from todo_app.application.common.result import ErrorCode
+from todo_app.application.use_cases.deadline_use_cases import CheckDeadlineUseCase
 
-from TodoApp.todo_app.domain.entities.task import Task
-from TodoApp.todo_app.domain.exceptions import BusinessRuleViolation, ValidationError, TaskNotFoundError
+from todo_app.domain.entities.task import Task
+from todo_app.domain.exceptions import BusinessRuleViolation, ValidationError, TaskNotFoundError
 
-from TodoApp.todo_app.domain.value_objects import Deadline
+from todo_app.domain.value_objects import Deadline
 
 def test_check_deadlines_empty_repository():
 

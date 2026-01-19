@@ -2,9 +2,9 @@ import dataclasses
 from datetime import datetime, timezone
 import pytest
 
-from TodoApp.todo_app.domain.value_objects import TaskStatus, Priority
-from TodoApp.todo_app.application.dtos.task_dtos import TaskResponse
-from TodoApp.todo_app.interfaces.presenters.cli import CliTaskPresenter
+from todo_app.domain.value_objects import TaskStatus, Priority
+from todo_app.application.dtos.task_dtos import TaskResponse
+from todo_app.interfaces.presenters.cli import CliTaskPresenter
 
 @pytest.fixture
 def task_presenter():

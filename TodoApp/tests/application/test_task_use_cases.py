@@ -2,13 +2,13 @@ from uuid import uuid4
 import pytest
 
 from tests.application.conftest import InMemoryTaskRepository, InMemoryProjectRepository, NotificationRecorder
-from TodoApp.todo_app.application.common.result import ErrorCode
-from TodoApp.todo_app.application.dtos.task_dtos import CreateTaskRequest, CompleteTaskRequest, SetTaskPriorityRequest
-from TodoApp.todo_app.application.use_cases.task_use_cases import CreateTaskUseCase, CompleteTaskUseCase, SetTaskPriorityUseCase
-from TodoApp.todo_app.domain.entities.project import Project
-from TodoApp.todo_app.domain.entities.task import Task
-from TodoApp.todo_app.domain.exceptions import BusinessRuleViolation, ValidationError
-from TodoApp.todo_app.domain.value_objects import Priority, TaskStatus
+from todo_app.application.common.result import ErrorCode
+from todo_app.application.dtos.task_dtos import CreateTaskRequest, CompleteTaskRequest, SetTaskPriorityRequest
+from todo_app.application.use_cases.task_use_cases import CreateTaskUseCase, CompleteTaskUseCase, SetTaskPriorityUseCase
+from todo_app.domain.entities.project import Project
+from todo_app.domain.entities.task import Task
+from todo_app.domain.exceptions import BusinessRuleViolation, ValidationError
+from todo_app.domain.value_objects import Priority, TaskStatus
 
 
 def test_create_task_basic():

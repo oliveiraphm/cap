@@ -2,15 +2,15 @@ from copy import deepcopy
 from dataclasses import dataclass
 from uuid import UUID
 
-from TodoApp.todo_app.application.dtos.operations import DeletionOutcome
-from TodoApp.todo_app.application.common.result import Result, Error
-from TodoApp.todo_app.application.dtos.task_dtos import CompleteTaskRequest,CreateTaskRequest,TaskResponse,SetTaskPriorityRequest
-from TodoApp.todo_app.application.service_ports.notifications import NotificationPort
-from TodoApp.todo_app.application.repositories.project_repository import ProjectRepository
-from TodoApp.todo_app.application.repositories.task_repository import TaskRepository
-from TodoApp.todo_app.domain.entities.task import Task
-from TodoApp.todo_app.domain.exceptions import TaskNotFoundError, ProjectNotFoundError, ValidationError, BusinessRuleViolation
-from TodoApp.todo_app.domain.value_objects import Priority
+from todo_app.application.dtos.operations import DeletionOutcome
+from todo_app.application.common.result import Result, Error
+from todo_app.application.dtos.task_dtos import CompleteTaskRequest,CreateTaskRequest,TaskResponse,SetTaskPriorityRequest, UpdateTaskRequest
+from todo_app.application.service_ports.notifications import NotificationPort
+from todo_app.application.repositories.project_repository import ProjectRepository
+from todo_app.application.repositories.task_repository import TaskRepository
+from todo_app.domain.entities.task import Task
+from todo_app.domain.exceptions import TaskNotFoundError, ProjectNotFoundError, ValidationError, BusinessRuleViolation
+from todo_app.domain.value_objects import Priority
 
 @dataclass
 class CompleteTaskUseCase:
@@ -21,7 +21,7 @@ class CompleteTaskUseCase:
     def execute(self, request: CompleteTaskRequest) -> Result:
 
         try:
-            params = request.to_exceution_params()
+            params = request.to_execution_params()
             task = self.task_repository.get(params["task_id"])
 
             task_snapshot = deepcopy(task)

@@ -1,16 +1,16 @@
 from dataclasses import dataclass
 
-from TodoApp.todo_app.infrastructure.notifications.factory import create_notification_service
-from TodoApp.todo_app.application.service_ports.notifications import NotificationPort
-from TodoApp.todo_app.application.repositories.project_repository import ProjectRepository
-from TodoApp.todo_app.application.repositories.task_repository import TaskRepository
-from TodoApp.todo_app.interfaces.presenters.base import ProjectPresenter, TaskPresenter
-from TodoApp.todo_app.application.use_cases.project_use_cases import CompleteProjectUseCase, CreateProjectUseCase, GetProjectUseCase, ListProjectUseCase, UpdateProjectUseCase
-from TodoApp.todo_app.application.use_cases.task_use_cases import CompleteTaskUseCase, CreateTaskUseCase, DeleteTaskUseCase, GetTaskUseCase, UpdateTaskUseCase
+from todo_app.infrastructure.notifications.factory import create_notification_service
+from todo_app.application.service_ports.notifications import NotificationPort
+from todo_app.application.repositories.project_repository import ProjectRepository
+from todo_app.application.repositories.task_repository import TaskRepository
+from todo_app.interfaces.presenters.base import ProjectPresenter, TaskPresenter
+from todo_app.application.use_cases.project_use_cases import CompleteProjectUseCase, CreateProjectUseCase, GetProjectUseCase, ListProjectsUseCase, UpdateProjectUseCase
+from todo_app.application.use_cases.task_use_cases import CompleteTaskUseCase, CreateTaskUseCase, DeleteTaskUseCase, GetTaskUseCase, UpdateTaskUseCase
 
-from TodoApp.todo_app.interfaces.controllers.project_controller import ProjectController
-from TodoApp.todo_app.interfaces.controllers.task_controller import TaskController
-from TodoApp.todo_app.infrastructure.repository_factory import create_repositories
+from todo_app.interfaces.controllers.project_controller import ProjectController
+from todo_app.interfaces.controllers.task_controller import TaskController
+from todo_app.infrastructure.repository_factory import create_repositories
 
 def create_application(
     notification_service: NotificationPort,

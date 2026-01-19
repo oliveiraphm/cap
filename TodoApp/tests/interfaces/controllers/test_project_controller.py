@@ -2,12 +2,12 @@ from datetime import datetime, timezone
 from uuid import uuid4
 import pytest
 
-from TodoApp.todo_app.domain.value_objects import ProjectStatus, ProjectType
-from TodoApp.todo_app.application.dtos.project_dtos import ProjectResponse, CompleteProjectResponse
-from TodoApp.todo_app.application.common.result import Result, Error, ErrorCode
-from TodoApp.todo_app.interfaces.controllers.project_controller import ProjectController
-from TodoApp.todo_app.interfaces.view_models.project_vm import ProjectViewModel
-from TodoApp.todo_app.interfaces.view_models.base import ErrorViewModel
+from todo_app.domain.value_objects import ProjectStatus, ProjectType
+from todo_app.application.dtos.project_dtos import ProjectResponse, CompleteProjectResponse
+from todo_app.application.common.result import Result, Error, ErrorCode
+from todo_app.interfaces.controllers.project_controller import ProjectController
+from todo_app.interfaces.view_models.project_vm import ProjectViewModel
+from todo_app.interfaces.view_models.base import ErrorViewModel
 
 
 @pytest.fixture

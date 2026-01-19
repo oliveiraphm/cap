@@ -1,10 +1,12 @@
 from datetime import datetime, timezone
 from typing import Optional
-from TodoApp.todo_app.domain.value_objects import Priority
-from TodoApp.todo_app.interfaces.view_models.base import ErrorViewModel
-from TodoApp.todo_app.application.dtos.task_dtos import TaskResponse
-from TodoApp.todo_app.interfaces.presenters.base import TaskPresenter
-from TodoApp.todo_app.interfaces.view_models.task_vm import TaskViewModel
+from todo_app.domain.value_objects import Priority, TaskStatus
+from todo_app.interfaces.view_models.base import ErrorViewModel
+from todo_app.application.dtos.project_dtos import CompleteProjectResponse, ProjectResponse
+from todo_app.interfaces.view_models.project_vm import ProjectCompletionViewModel, ProjectViewModel
+from todo_app.application.dtos.task_dtos import TaskResponse
+from todo_app.interfaces.presenters.base import ProjectPresenter, TaskPresenter
+from todo_app.interfaces.view_models.task_vm import TaskViewModel
 
 class CliTaskPresenter(TaskPresenter):
     
@@ -55,3 +57,44 @@ class CliTaskPresenter(TaskPresenter):
     
     def present_error(self, error_msg: str, code: Optional[str] = None) -> ErrorViewModel:
         return ErrorViewModel(message=error_msg, code=code)
+    
+class CliProjectPresenter(ProjectPresenter):
+
+    def __init__(self):
+        self.task_presenter = CliTaskPresenter()
+
+    def present_project(self, project_response: ProjectResponse) -> ProjectViewModel:
+        # Convert tasks to view models
+        task_vms = [self.task_presenter.present_task(task) for task in project_response.tasks]
+
+        # Count completed tasks
+        completed = sum(1 for task in project_response.tasks if task.status == TaskStatus.DONE)
+
+        return ProjectViewModel(
+            id=str(project_response.id),
+            name=project_response.name,
+            description=project_response.description,
+            project_type=project_response.project_type.name,
+            status_display=f"[{project_response.status.name}]",
+            task_count=len(project_response.tasks),
+            completed_task_count=completed,
+            completion_info=self._format_completion_info(project_response.completion_date),
+            tasks=task_vms,
+        )
+
+    def present_completion(
+        self, completion_response: CompleteProjectResponse
+    ) -> ProjectCompletionViewModel:
+
+        return ProjectCompletionViewModel(
+            project_id=str(completion_response.id),
+            completion_notes=completion_response.completion_notes,
+        )
+
+    def present_error(self, error_msg: str, code: Optional[str] = None) -> ErrorViewModel:
+        return ErrorViewModel(message=error_msg, code=code)
+
+    def _format_completion_info(self, completion_date: Optional[datetime]) -> str:
+        if completion_date:
+            return f"Completed on {completion_date.strftime('%Y-%m-%d %H:%M')}"
+        return "Not completed"

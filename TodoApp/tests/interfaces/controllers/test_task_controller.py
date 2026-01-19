@@ -1,12 +1,12 @@
 from datetime import datetime, timezone
 import pytest
 from uuid import uuid4
-from TodoApp.todo_app.interfaces.view_models.base import ErrorViewModel
-from TodoApp.todo_app.domain.value_objects import TaskStatus, Priority
-from TodoApp.todo_app.application.dtos.task_dtos import TaskResponse
-from TodoApp.todo_app.application.common.result import Result, Error, ErrorCode
-from TodoApp.todo_app.interfaces.controllers.task_controller import TaskController
-from TodoApp.todo_app.interfaces.view_models.task_vm import TaskViewModel
+from todo_app.interfaces.view_models.base import ErrorViewModel
+from todo_app.domain.value_objects import TaskStatus, Priority
+from todo_app.application.dtos.task_dtos import TaskResponse
+from todo_app.application.common.result import Result, Error, ErrorCode
+from todo_app.interfaces.controllers.task_controller import TaskController
+from todo_app.interfaces.view_models.task_vm import TaskViewModel
 
 
 @pytest.fixture

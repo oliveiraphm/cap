@@ -1,10 +1,10 @@
 from typing import Optional
 import click
 
-from TodoApp.todo_app.interfaces.view_models.task_vm import TaskViewModel
-from TodoApp.todo_app.interfaces.view_models.project_vm import ProjectViewModel
-from TodoApp.todo_app.infrastructure.configuration.container import Application
-from TodoApp.todo_app.domain.value_objects import Priority
+from todo_app.interfaces.view_models.task_vm import TaskViewModel
+from todo_app.interfaces.view_models.project_vm import ProjectViewModel
+from todo_app.infrastructure.configuration.container import Application
+from todo_app.domain.value_objects import Priority
 
 class ClickCli:
 

@@ -2,14 +2,14 @@ from copy import deepcopy
 from dataclasses import dataclass
 from uuid import UUID
 
-from TodoApp.todo_app.domain.value_objects import ProjectType
-from TodoApp.todo_app.application.common.result import Result, Error
-from TodoApp.todo_app.application.dtos.project_dtos import CreateProjectRequest, ProjectResponse, CompleteProjectRequest, CompleteProjectResponse, UpdateProjectRequest
-from TodoApp.todo_app.application.service_ports.notifications import NotificationPort
-from TodoApp.todo_app.application.repositories.project_repository import ProjectRepository
-from TodoApp.todo_app.application.repositories.task_repository import TaskRepository
-from TodoApp.todo_app.domain.entities.project import Project
-from TodoApp.todo_app.domain.exceptions import ValidationError, BusinessRuleViolation, ProjectNotFoundError
+from todo_app.domain.value_objects import ProjectType
+from todo_app.application.common.result import Result, Error
+from todo_app.application.dtos.project_dtos import CreateProjectRequest, ProjectResponse, CompleteProjectRequest, CompleteProjectResponse, UpdateProjectRequest
+from todo_app.application.service_ports.notifications import NotificationPort
+from todo_app.application.repositories.project_repository import ProjectRepository
+from todo_app.application.repositories.task_repository import TaskRepository
+from todo_app.domain.entities.project import Project
+from todo_app.domain.exceptions import ValidationError, BusinessRuleViolation, ProjectNotFoundError
 
 @dataclass
 class CreateProjectUseCase:
@@ -21,7 +21,7 @@ class CreateProjectUseCase:
         try:
             params = request.to_execution_params()
             project = Project(name=params["name"], description=params["description"])
-            self.project_respository.save(project)
+            self.project_repository.save(project)
             
             return Result.success(ProjectResponse.from_entity(project))
         

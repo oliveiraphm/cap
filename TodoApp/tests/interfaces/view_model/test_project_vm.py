@@ -1,8 +1,8 @@
 import dataclasses
 import pytest
 
-from TodoApp.todo_app.domain.value_objects import ProjectType
-from TodoApp.todo_app.interfaces.view_models.project_vm import ProjectViewModel
+from todo_app.domain.value_objects import ProjectType
+from todo_app.interfaces.view_models.project_vm import ProjectViewModel
 
 
 def test_project_view_model_creation():

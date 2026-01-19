@@ -1,6 +1,6 @@
 import dataclasses
 import pytest
-from TodoApp.todo_app.interfaces.view_models.base import ErrorViewModel, OperationResult
+from todo_app.interfaces.view_models.base import ErrorViewModel, OperationResult
 
 def test_error_view_model_creation():
 

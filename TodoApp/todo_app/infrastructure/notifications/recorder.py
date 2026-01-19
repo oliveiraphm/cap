@@ -1,6 +1,6 @@
 from dataclasses import dataclass
-from TodoApp.todo_app.domain.entities.task import Task
-from TodoApp.todo_app.application.service_ports.notifications import NotificationPort
+from todo_app.domain.entities.task import Task
+from todo_app.application.service_ports.notifications import NotificationPort
 
 @dataclass
 class NotificationRecorder(NotificationPort):

@@ -3,10 +3,10 @@ from datetime import datetime
 from typing import Optional, Sequence, Self
 from uuid import UUID
 
-from TodoApp.todo_app.domain.exceptions import BusinessRuleViolation
-from TodoApp.todo_app.domain.value_objects import ProjectStatus
-from TodoApp.todo_app.application.dtos.task_dtos import TaskResponse
-from TodoApp.todo_app.domain.entities.project import Project
+from todo_app.domain.exceptions import BusinessRuleViolation
+from todo_app.domain.value_objects import ProjectStatus, ProjectType
+from todo_app.application.dtos.task_dtos import TaskResponse
+from todo_app.domain.entities.project import Project
 
 @dataclass(frozen=True)
 class CreateProjectRequest:
@@ -58,6 +58,7 @@ class ProjectResponse:
     name: str
     description: str
     status: ProjectStatus
+    project_type: ProjectType
     completion_date: Optional[datetime]
     tasks: Sequence[TaskResponse]
 
@@ -68,6 +69,7 @@ class ProjectResponse:
             name=project.name,
             description=project.description,
             status=project.status,
+            project_type=project.project_type,
             completion_date=project.completed_at if project.completed_at else None,
             tasks=[TaskResponse.from_entity(task) for task in project.tasks],           
         )

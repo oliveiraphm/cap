@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
-from TodoApp.todo_app.interfaces.view_models.base import ErrorViewModel
-from TodoApp.todo_app.application.dtos.project_dtos import CompleteProjectResponse, ProjectResponse
-from TodoApp.todo_app.application.dtos.task_dtos import TaskResponse
-from TodoApp.todo_app.interfaces.view_models.project_vm import ProjectCompletionViewModel, ProjectViewModel
-from TodoApp.todo_app.interfaces.view_models.task_vm import TaskViewModel
+from todo_app.interfaces.view_models.base import ErrorViewModel
+from todo_app.application.dtos.project_dtos import CompleteProjectResponse, ProjectResponse
+from todo_app.application.dtos.task_dtos import TaskResponse
+from todo_app.interfaces.view_models.project_vm import ProjectCompletionViewModel, ProjectViewModel
+from todo_app.interfaces.view_models.task_vm import TaskViewModel
 
 
 class TaskPresenter(ABC):

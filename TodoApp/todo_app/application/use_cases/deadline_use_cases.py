@@ -1,10 +1,10 @@
 from dataclasses import field, dataclass
 from datetime import timedelta
 
-from TodoApp.todo_app.application.common.result import Result, Error
-from TodoApp.todo_app.application.service_ports.notifications import NotificationPort
-from TodoApp.todo_app.application.repositories.task_repository import TaskRepository
-from TodoApp.todo_app.domain.exceptions import TaskNotFoundError, ValidationError, BusinessRuleViolation
+from todo_app.application.common.result import Result, Error
+from todo_app.application.service_ports.notifications import NotificationPort
+from todo_app.application.repositories.task_repository import TaskRepository
+from todo_app.domain.exceptions import TaskNotFoundError, ValidationError, BusinessRuleViolation
 
 @dataclass
 class CheckDeadlinesUseCase:
