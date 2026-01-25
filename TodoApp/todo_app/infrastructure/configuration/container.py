@@ -7,17 +7,23 @@ from todo_app.application.repositories.task_repository import TaskRepository
 from todo_app.interfaces.presenters.base import ProjectPresenter, TaskPresenter
 from todo_app.application.use_cases.project_use_cases import CompleteProjectUseCase, CreateProjectUseCase, GetProjectUseCase, ListProjectsUseCase, UpdateProjectUseCase
 from todo_app.application.use_cases.task_use_cases import CompleteTaskUseCase, CreateTaskUseCase, DeleteTaskUseCase, GetTaskUseCase, UpdateTaskUseCase
-
 from todo_app.interfaces.controllers.project_controller import ProjectController
 from todo_app.interfaces.controllers.task_controller import TaskController
 from todo_app.infrastructure.repository_factory import create_repositories
+
+
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 def create_application(
     notification_service: NotificationPort,
     task_presenter: TaskPresenter,
     project_presenter: ProjectPresenter,
+    app_context: str,
 ) -> "Application":
-    
+
     task_repository, project_repository = create_repositories()
 
     notification_service = create_notification_service()
@@ -30,6 +36,7 @@ def create_application(
         project_presenter=project_presenter,
     )
 
+
 @dataclass
 class Application:
 
@@ -38,6 +45,7 @@ class Application:
     notification_service: NotificationPort
     task_presenter: TaskPresenter
     project_presenter: ProjectPresenter
+    # logger: ApplicationLogger
 
     def __post_init__(self):
 
@@ -65,6 +73,7 @@ class Application:
         )
 
         self.update_project_use_case = UpdateProjectUseCase(self.project_repository)
+
 
         self.task_controller = TaskController(
             create_use_case=self.create_task_use_case,

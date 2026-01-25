@@ -1,13 +1,15 @@
-
 from flask import Flask
 from todo_app.infrastructure.configuration.container import Application
+from todo_app.infrastructure.web.middleware import trace_requests
 
 
 def create_web_app(app_container: Application) -> Flask:
-    """Create and configure Flask application."""
+    
     flask_app = Flask(__name__)
-    flask_app.config["SECRET_KEY"] = "dev"
+    flask_app.config["SECRET_KEY"] = "production" 
     flask_app.config["APP_CONTAINER"] = app_container
+
+    trace_requests(flask_app)
 
     from . import routes
 

@@ -24,7 +24,6 @@ def index():
 
 @bp.route("/projects/new", methods=["GET", "POST"])
 def new_project():
-
     if request.method == "POST":
         name = request.form["name"]
         app = current_app.config["APP_CONTAINER"]
@@ -42,8 +41,9 @@ def new_project():
     return render_template("project_form.html")
 
 
-@bp.route("/projects/<project_id>/tasks/new", methods=["GET", "POST"])
+@bp.route("/projects/<project_id>/task  s/new", methods=["GET", "POST"])
 def new_task(project_id):
+
     if request.method == "POST":
         app = current_app.config["APP_CONTAINER"]
         result = app.task_controller.handle_create(
@@ -59,7 +59,6 @@ def new_task(project_id):
             flash(error.message, "error")
             return redirect(url_for("todo.index"))
 
-        # Use view model directly from controller response
         task = result.success
         flash(f'Task "{task.title}" created successfully', "success")
         return redirect(url_for("todo.index"))
@@ -103,6 +102,7 @@ def edit_task(task_id):
 
 @bp.route("/tasks/<task_id>/complete", methods=["POST"])
 def complete_task(task_id):
+
     app = current_app.config["APP_CONTAINER"]
 
     result = app.task_controller.handle_complete(

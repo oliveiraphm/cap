@@ -45,7 +45,7 @@ class Result(Generic[T]):
     def __post_init__(self):
         if (self._value is None and self._error is None) or \
         (self._value is not None and self._error is not None):
-            raise ValueErroe("Either value or error must be provided, but not both")
+            raise ValueError("Either value or error must be provided, but not both")
         
     @property
     def is_success(self) -> bool:

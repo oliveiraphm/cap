@@ -16,3 +16,7 @@ class ProjectRepository(ABC):
     @abstractmethod
     def delete(self, project_id: UUID) -> None:
         pass
+
+    @abstractmethod
+    def get_inbox(self) -> Project:
+        pass

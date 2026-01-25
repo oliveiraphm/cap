@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta, timezone
 import pytest
 
-from todo_app.application.dtos.project_dtos import CompleteProjectRequest, CreatProjectRequest
+from todo_app.application.dtos.project_dtos import CompleteProjectRequest, CreateProjectRequest
 from todo_app.application.dtos.task_dtos import CompleteTaskRequest, CreateTaskRequest, SetTaskPriorityRequest
 
 class TestCompleteTaskRequest:
